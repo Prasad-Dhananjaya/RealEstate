@@ -1,0 +1,121 @@
+/*****************************
+ * CREATE BY :14208904
+ * NAME:S.K.GAYAN DUMINDA
+ * GROUP NAME:ABACUS
+ * *********************************
+ * */
+
+
+package org.datastructure.com;
+import java.io.Console;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.table.DefaultTableModel;
+
+
+public class ListHouse extends javax.swing.JDialog {
+	
+	
+	public ListHouse(List<House> houses){
+		
+		//houses = new House().readFile();
+		initComponents();
+		setLocationRelativeTo(null);
+        
+        SortedList sl = new SortedList();
+        sl.setHouses(houses);
+        houses = sl.getShortHouses();
+        
+        House hr = new House();
+        hr.saveHouseList(houses);
+        
+        for(House h: houses )
+        {
+        	System.out.println(h.getLotNumber() + "\t" + h.getFirstName() + "\t" + h.getLastName() + "\t" + h.getNumberOfBedRooms() + "\t" + h.getPrice() + "\t" + h.getSquareFeet());
+        }
+        
+        DefaultTableModel df;
+        df = (DefaultTableModel) jTable1.getModel();
+        
+        for(House h: houses){
+            Vector v = new Vector();
+            v.add(h.getLotNumber());
+            v.add(h.getFirstName());
+            v.add(h.getLastName());
+            v.add(h.getPrice());
+            v.add(h.getSquareFeet());
+            v.add(h.getNumberOfBedRooms());
+           
+            df.addRow(v);
+        }
+        
+	}
+	
+	
+	
+	
+    @SuppressWarnings("unchecked")
+    
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Lot Number", "First Name", "Last Name", "Price", "Square Feet", "No of Bedrooms"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+        );
+
+        pack();
+        
+    }
+
+    // Variables declaration - do not modify
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration
+
+}
